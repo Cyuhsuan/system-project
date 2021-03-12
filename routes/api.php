@@ -30,7 +30,7 @@ Route::middleware('auth:api')->group(function () {
     // 使用者編輯功能
     Route::prefix('user')->group(function () {
         Route::post('edit', [UserController::class, 'userEdit']);
-        // Route::post('password-edit', [UserController::class, 'passwordEdit']);
+        Route::post('password-edit', [UserController::class, 'passwordEdit']);
     });
 
     // 留言板功能

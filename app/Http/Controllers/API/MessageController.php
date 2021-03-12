@@ -32,9 +32,9 @@ class MessageController extends BaseController
             ->select([
                 'id',
                 'content',
-                DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d %H:%i:%s") as date'),
+                'created_at as date',
                 'user_id',
-                DB::raw('DATE_FORMAT(updated_at,"%Y-%m-%d %H:%i:%s") as update_at')
+                'updated_at as update_at'
             ])
             ->limit(10)
             ->get();
@@ -90,10 +90,10 @@ class MessageController extends BaseController
                     $q->with(['user' => function ($reply_q) {
                         $reply_q->select('id', 'account', 'name');
                     }])
-                        ->select('id', 'content', 'message_id', 'user_id', DB::raw('DATE_FORMAT(updated_at,"%Y-%m-%d %H:%i:%s") as date'));
+                        ->select('id', 'content', 'message_id', 'user_id', 'updated_at as date');
                 }
             ])
-            ->select('id', 'content', DB::raw('DATE_FORMAT(updated_at,"%Y-%m-%d %H:%i:%s") as date'), 'user_id')
+            ->select('id', 'content', 'updated_at as date', 'user_id')
             ->get();
         return $msg;
     }

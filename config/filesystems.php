@@ -38,7 +38,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -51,6 +51,14 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+
+        'uploads' => [
+            'driver' => 'local',
+            // 檔案上傳到 storage/app/uploads
+            // 'root' => storage_path('app/uploads')
+            // 檔案將上傳到public/uploads目錄 如果需要瀏覽器直接訪問 請設定成這個
+            'root' => public_path('uploads'),
+        ]
 
     ],
 

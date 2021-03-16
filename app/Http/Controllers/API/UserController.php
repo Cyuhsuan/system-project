@@ -9,7 +9,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Validator;
 use Hash;
-use Storage;
+// use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -95,7 +96,11 @@ class UserController extends Controller
 
             //要儲存的檔名 md5(時間)+副檔名
             $now = Carbon::now();
-            $filename = md5($now) . uniqid() . '.' . $extendname;
+            $filename = 'user/' . md5($now) . uniqid() . '.' . $extendname;
+            // 如果已有頭像,刪除原有相片
+            if ($user->photo_address) {
+                Storage::disk('uploads')->delete($user->photo_address);
+            }
             //儲存檔案          配置檔案存放檔案的名字  ，檔名，路徑
             $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
             $user->photo_address = $filename;

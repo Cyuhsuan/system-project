@@ -54,8 +54,8 @@ return [
 
         'uploads' => [
             'driver' => 'local',
-            // 檔案上傳到 storage/app/uploads
-            // 'root' => storage_path('app/uploads')
+            // 檔案上傳到 storage/app/public/uploads
+            // 'root' => storage_path('app/public/uploads')
             // 檔案將上傳到public/uploads目錄 如果需要瀏覽器直接訪問 請設定成這個
             'root' => public_path('uploads'),
         ]

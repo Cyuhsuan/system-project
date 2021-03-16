@@ -30,6 +30,7 @@ Route::middleware('auth:api')->group(function () {
     // 使用者編輯功能
     Route::prefix('user')->group(function () {
         Route::post('edit', [UserController::class, 'userEdit']);
+        Route::post('photo-upload', [UserController::class, 'photoUpload'])->middleware('cors');
         Route::post('password-edit', [UserController::class, 'passwordEdit']);
     });
 

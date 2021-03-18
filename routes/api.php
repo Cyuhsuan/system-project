@@ -30,8 +30,11 @@ Route::middleware('auth:api')->group(function () {
     // 使用者編輯功能
     Route::prefix('user')->group(function () {
         Route::post('edit', [UserController::class, 'userEdit']);
-        Route::post('photo-upload', [UserController::class, 'photoUpload'])->middleware('cors');
         Route::post('password-edit', [UserController::class, 'passwordEdit']);
+        // 使用者頭像相關功能
+        Route::post('edit-photo-upload', [UserController::class, 'editPhotoUpload']);
+        Route::post('delete-photo-upload', [UserController::class, 'deletePhotoUpload']);
+        Route::post('photo-upload', [UserController::class, 'photoUpload'])->middleware('cors');
     });
 
     // 留言板功能

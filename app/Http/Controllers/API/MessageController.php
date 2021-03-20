@@ -37,6 +37,7 @@ class MessageController extends BaseController
                 'updated_at as update_at'
             ])
             ->limit(10)
+            ->orderby('date','desc')
             ->get();
         return $msg->map(function ($row) {
             $row->isEdit = ($row->date === $row->update_at) ? false : true;

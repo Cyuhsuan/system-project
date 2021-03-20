@@ -17,6 +17,7 @@ class CreateProductionsTable extends Migration
             $table->id();
             $table->text('description')->nullable(false)->comment('商品介紹');
             $table->string('photo_address')->comment('商品圖片地址');
+            $table->integer('price')->comment('商品價格');
 
             $table->timestamps();
         });

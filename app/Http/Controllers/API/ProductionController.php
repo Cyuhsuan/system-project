@@ -81,6 +81,7 @@ class ProductionController extends BaseController
         $description = $request['description'];
         $title = $request['title'];
         $id = $request['id'] ?? '';
+        $price = $request['price'] ?? 0;
         $production = Production::find($id);
 
         // $user = User::find((Auth::user())->id);
@@ -90,12 +91,14 @@ class ProductionController extends BaseController
             $production->photo_address = $fileUrl;
             $production->description = $description;
             $production->title = $title;
+            $production->price = $price;
             $production->update();
         } else {
             $new_production = new Production();
             $new_production->photo_address = $fileUrl;
             $new_production->description = $description;
             $new_production->title = $title;
+            $new_production->price = $price;
             $new_production->save();
         }
         return json_encode(['status' => 1, 'filepath' => $fileUrl]);

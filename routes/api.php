@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PublicController;
 use App\Http\Controllers\API\MessageController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\ProductionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,12 @@ Route::middleware('auth:api')->group(function () {
             Route::post('add', [MessageController::class, 'replyStore']);
         });
     });
-    // Route::resource('products', ProductController::class);
+
+    // 商品管理功能
+    Route::prefix('production')->group(function () {
+        Route::get('index', [ProductionController::class, 'index']);
+        Route::post('photo-upload', [ProductionController::class, 'photoUpload']);
+        Route::post('delete-photo-upload', [ProductionController::class, 'deletePhotoUpload']);
+        Route::post('edit-photo-upload', [ProductionController::class, 'editPhotoUpload']);
+    });
 });

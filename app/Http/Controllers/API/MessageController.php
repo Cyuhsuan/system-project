@@ -18,9 +18,12 @@ class MessageController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // $msg = Message::all()->user();
+        $request = $request->all();
+        $id = (int) $request['id'];
+        // dd($id);
         $msg = Message::with(
             [
                 'user' => function ($q) {
@@ -37,8 +40,11 @@ class MessageController extends BaseController
                 'updated_at as update_at'
             ])
             ->limit(10)
-            ->orderby('date','desc')
-            ->get();
+            ->orderby('date', 'desc');
+        if ($id > 0) {
+            $msg = $msg->where('id', '<', $id);
+        }
+        $msg = $msg->get();
         return $msg->map(function ($row) {
             $row->isEdit = ($row->date === $row->update_at) ? false : true;
             $row->replyCount = MessageReply::where('message_id', $row->id)->count();
